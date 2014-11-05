@@ -8,6 +8,7 @@ class TestTooSlow(Exception):
 
 
 class TooSlow(Plugin):
+    """Treat tests that are too slow as errors."""
 
     name = 'tooslow'
     enabled = True
@@ -16,7 +17,10 @@ class TooSlow(Plugin):
 
     def options(self, parser, env=os.environ):
         super(TooSlow, self).options(parser, env=env)
-        parser.add_option('--tooslow-time', type=float, default=1.0)
+        parser.add_option('--tooslow-time', type=float,
+                default=1.0, metavar="SECONDS",
+                help="Consider any tests that take this many seconds "
+                    "(or longer) to be errors; default 1.0")
 
     def configure(self, options, config):
         super(TooSlow, self).configure(options, config)
