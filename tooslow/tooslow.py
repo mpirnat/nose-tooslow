@@ -12,16 +12,18 @@ class TooSlow(Plugin):
     name = 'tooslow'
     enabled = True
 
-    max_time = 1
+    max_time = 1.0
 
     def options(self, parser, env=os.environ):
         super(TooSlow, self).options(parser, env=env)
+        parser.add_option('--tooslow-time', type=float, default=1.0)
 
     def configure(self, options, config):
         super(TooSlow, self).configure(options, config)
         self.config = config
         if not self.enabled:
             return
+        self.max_time = options.tooslow_time
 
     def startTest(self, test):
         self.t1 = time.time()
@@ -30,5 +32,5 @@ class TooSlow(Plugin):
         t2 = time.time()
         elapsed = t2 - self.t1
         if elapsed >= self.max_time:
-            raise TestTooSlow("Elapsed time %ss exceeds max of %ss" %
+            raise TestTooSlow("Elapsed time %0.3fs exceeds max of %0.3fs" %
                     (elapsed, self.max_time))

@@ -22,7 +22,7 @@ class TestWhenRunningTests(TooSlowTest, unittest.TestCase):
         return str(output).split('\n')[0]
 
     def test_one_test_too_slow(self):
-        assert 'E' in self._first_line(self.output)
+        assert self._first_line(self.output).count('E') == 1
 
     def test_one_test_not_too_slow(self):
-        assert '.' in self._first_line(self.output)
+        assert self._first_line(self.output).count('.') == 1
