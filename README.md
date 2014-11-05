@@ -37,7 +37,7 @@ Example
 
     ...E...
     ======================================================================
-    ERROR: test_test_too_slow
+    ERROR: test_a_test_that_is_too_slow
     ----------------------------------------------------------------------
     Traceback (most recent call last):
     ...
